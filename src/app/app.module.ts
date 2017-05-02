@@ -30,7 +30,6 @@ import { UsersComponent } from './users';
 import { MapViewComponent } from './map-view';
 import { CachingFactory } from './factories';
 
-import '../../node_modules/openlayers/dist/ol.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../../node_modules/mangol/src/assets/scss/mangol.scss';
 

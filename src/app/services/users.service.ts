@@ -7,6 +7,14 @@ import { Http } from '@angular/http';
 export class Users {
   constructor(public http: Http) { }
 
+  private static responseWrapper(responseRaw: any) {
+    try {
+      return responseRaw.json();
+    } catch (e) {
+      return { data: [] };
+    }
+  }
+
   public getUsers() {
     return this.http
       .get('http://mobi.connectedcar360.net/api/?op=list')
@@ -29,13 +37,5 @@ export class Users {
       .toPromise()
       .then(Users.responseWrapper)
       .then((response) => response.results);
-  }
-
-  private static responseWrapper(responseRaw: any) {
-    try {
-      return responseRaw.json();
-    } catch (e) {
-      return { data: [] };
-    }
-  }
+  }  
 }
