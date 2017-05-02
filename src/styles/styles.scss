@@ -1,0 +1,75 @@
+/* this file will be extracted to main dist folder and is imported in index.html */
+@import '~@angular/material/core/theming/prebuilt/indigo-pink.css';
+/* This file is for setting global styles  */
+@import 'variables';
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+md-toolbar {
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    .mat-icon {
+      margin-left: 6px;
+      text-decoration: none;
+    }
+  }
+}
+
+.ol-overlaycontainer-stopevent,
+.custom-buttons {
+  display: none;
+}
+
+.map-wrapper {
+  position: relative;
+}
+.map-actions {
+  display: flex;
+  flex-direction: column;
+  left: 10px;
+  position: absolute;
+  top: 10px;
+  >:not(:first-child) {
+    margin-top: 6px;
+  }
+}
+
+.vehicle-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  &__prop {
+    display: flex;
+    flex-direction: row;
+    margin-top: 8px;
+    &-name {
+      display: block;
+      font-style: italic;
+      min-width: 70px;
+    }
+    &-value {
+      font-weight: bold;
+      margin-left: 8px;
+    }
+  }
+  .mat-card-image {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50%;
+  }
+}
+
+md-list {
+  &.mat-list, &.mat-nav-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &-item {
+    cursor: pointer;
+  }
+}

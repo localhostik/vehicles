@@ -1,0 +1,14 @@
+<div class="users">
+  <div>
+    <ngx-datatable class="material" [rowHeight]="'auto'" [headerHeight]="'auto'" [columnMode]="'force'" [selected]="selected" [selectionType]="'single'" (select)='onSelect($event)' [rows]="rows" [columns]="columns">
+    </ngx-datatable>
+  </div> 
+</div>
+
+<template #photoTmpl let-row="row" let-value="value">
+  <img class="icon" src={{value}} alt="user"> 
+</template>
+
+<template #detailTmpl let-row="row" let-value="value">
+ <a href={{value}}  >details</a>
+</template>

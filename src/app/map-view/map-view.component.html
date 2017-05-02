@@ -1,0 +1,38 @@
+<div id="map-view">
+
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" md-button>
+    << Back</a>
+
+      <h3>User vehicles info:</h3>
+      <div>
+        <ngx-datatable class="material" [rowHeight]="'auto'" [headerHeight]="'auto'" [columnMode]="'force'" [selected]="selected"
+          [selectionType]="'single'" (select)='onSelect($event)' [rows]="rows" [columns]="columns">
+        </ngx-datatable>
+      </div>
+      <div class="map-wrapper">
+        <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)">
+
+          <sebm-google-map-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
+            [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
+
+            <!--Vehicle Info-->
+            <sebm-google-map-info-window [isOpen]="m.isOpen">
+              <strong>Vehicle Info</strong>
+              <div>
+                <img class="vehicle" md-card-image src="../../../assets/vehicle.png">
+              </div>
+              <div>
+                <span>Vehicle Name:</span>
+                <span [innerHTML]="m.label"></span>
+              </div>
+              <div>
+                <span>Current address:</span>
+                <span [innerHTML]="m.address"></span>
+              </div>
+            </sebm-google-map-info-window>
+
+          </sebm-google-map-marker>
+
+        </sebm-google-map>
+      </div>
+</div>

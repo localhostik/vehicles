@@ -1,0 +1,23 @@
+html, body{
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+a.active {
+  background-color: gray;
+}
+
+.icon{
+  height: 100px;
+  width: 100px;
+}
+
+.vehicle{
+  display: block;
+  margin-left: auto;
+  margin-right: auto 
+}
+
+.ngx-datatable .datatable-header .datatable-header-cell .sort-btn{
+  display: block!important;
+}
