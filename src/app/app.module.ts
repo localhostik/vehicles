@@ -62,7 +62,7 @@ type StoreType = {
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     MangolModule.forRoot(),
-    MaterialModule, 
+    MaterialModule,
     NgxDatatableModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAo0ruqFFzTlzo2BNe479fWn88C_Ig_ouI'

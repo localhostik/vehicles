@@ -30,13 +30,13 @@ import { Users } from '../services';
   templateUrl: './map-view.component.html'
 })
 export class MapViewComponent implements OnInit {
-  zoom: number = 10;
-  lat: number;
-  lng: number;
-  private markers: any;
+  public zoom: number = 10;
+  public lat: number;
+  public lng: number;
+  public markers: any;
   public map: any;
   public rows = [];
-  selected = [];
+  public selected = [];
   public columns = [];
   public items = [];
 
@@ -45,20 +45,20 @@ export class MapViewComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  onSelect({ selected }) {
+  public onSelect({ selected }) {
     this.lat = selected[0].Latitude;
     this.lng = selected[0].Longitude;
-    this.markers.forEach(element => {
-      element.isOpen = element.label == selected[0].Id;
+    this.markers.forEach((element) => {
+      element.isOpen = element.label === selected[0].Id;
     });
     console.log('Select Event', selected, this.selected);
   }
 
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+  public clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`);
   }
 
-  markerDragEnd(m: marker, $event: MouseEvent) {
+  public markerDragEnd(m: Marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
   }
 
@@ -85,8 +85,8 @@ export class MapViewComponent implements OnInit {
     this.lat = items[0].lat;
     this.lng = items[0].lon;
 
-    items.forEach(element => {
-      var address;
+    items.forEach((element) => {
+      let address;
       this.users.getVehicleAddress(element.lat, element.lon)
         .then((data) => {
           address = data != null ? data[0].formatted_address : '';
@@ -95,16 +95,17 @@ export class MapViewComponent implements OnInit {
             lng: element.lon,
             label: element.vehicleid.toString(),
             draggable: false,
-            address: address
+            address
           });
 
-          this.rows.push({ Id: element.vehicleid.toString(), Latitude: element.lat, Longitude: element.lon, Address: address });
+          this.rows.push({ Id: element.vehicleid.toString(),
+            Latitude: element.lat, Longitude: element.lon, Address: address });
         });
-    })
+    });
   };
 }
 
-interface marker {
+interface Marker {
   lat: number;
   lng: number;
   label?: string;

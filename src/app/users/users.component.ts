@@ -14,16 +14,16 @@ import { Users } from '../services';
 })
 
 export class UsersComponent implements OnInit {
-  private rows = [];
-  private columns = [];
-  selected = [];
-  @ViewChild('photoTmpl') photoTmpl: TemplateRef<any>;
-  @ViewChild('detailTmpl') detailTmpl: TemplateRef<any>;
+  public rows = [];
+  public columns = [];
+  public selected = [];
+  @ViewChild('photoTmpl') public photoTmpl: TemplateRef<any>;
+  @ViewChild('detailTmpl') public detailTmpl: TemplateRef<any>;
   constructor(
     public users: Users
   ) { }
 
-  onSelect({ selected }) {
+  public onSelect({ selected }) {
     console.log('Select Event', selected, this.selected);
   }
 
@@ -35,8 +35,10 @@ export class UsersComponent implements OnInit {
       { prop: 'Details', cellTemplate: this.detailTmpl }
     ];
     this.users.getUsers().then((users) => {
-      users.forEach(element => {
-        this.rows.push({ Photo: element.owner.foto, name: `${element.owner.name} ${element.owner.surname}`, Vehicles: element.vehicles.length, Details: '#/map-view/' + element.userid });
+      users.forEach((element) => {
+        this.rows.push({ Photo: element.owner.foto,
+          name: `${element.owner.name} ${element.owner.surname}`,
+          Vehicles: element.vehicles.length, Details: '#/map-view/' + element.userid });
       });
     });
   }

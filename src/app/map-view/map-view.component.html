@@ -10,7 +10,7 @@
         </ngx-datatable>
       </div>
       <div class="map-wrapper">
-        <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)">
+        <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
 
           <sebm-google-map-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
             [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">

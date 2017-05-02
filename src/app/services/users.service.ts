@@ -4,9 +4,8 @@ import 'rxjs/add/operator/toPromise';
 import { Http } from '@angular/http';
 
 @Injectable()
-export class Users {
-  constructor(public http: Http) { }
 
+export class Users {
   private static responseWrapper(responseRaw: any) {
     try {
       return responseRaw.json();
@@ -14,7 +13,7 @@ export class Users {
       return { data: [] };
     }
   }
-
+  constructor(public http: Http) { }
   public getUsers() {
     return this.http
       .get('http://mobi.connectedcar360.net/api/?op=list')
@@ -37,5 +36,5 @@ export class Users {
       .toPromise()
       .then(Users.responseWrapper)
       .then((response) => response.results);
-  }  
+  }
 }
