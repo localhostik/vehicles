@@ -8,17 +8,21 @@ export class CachingRequest extends Http {
   constructor(backend: ConnectionBackend, defaultOptions: RequestOptions) { super(backend, defaultOptions); }
 
   public request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-    return new Observable((observer) => {   
+    return new Observable((observer) => {
       let currentUrl = typeof url === 'string' ? url : url.url;
       let storage = localStorage.getItem(currentUrl);
       let localStorageData = JSON.parse(storage);
       let response;
 
-      if (localStorageData && new Date(localStorageData.updateTime) > new Date()) {       
+      if (localStorageData && new Date(localStorageData.updateTime) > new Date()) {
         response = CachingRequest.newResponse(currentUrl, localStorageData.data);
+        console.log('response from LS', response);
+        observer.next(response);
+        observer.complete();
       }
-      else {        
+      else {
         super.request(url, options).subscribe((value: Response) => {
+          console.log('response real');
           response = value;
           try {
             //300000 = 5min; 30000 = 30sec
@@ -28,16 +32,16 @@ export class CachingRequest extends Http {
                 updateTime: new Date(new Date().getTime() + (value.url.match(new RegExp(/(?:(location|geo)+)/gi)) ? 300000 : 30000))
               }
             ));
+            observer.next(value);
+            observer.complete();
           }
-          catch (e) {           
+          catch (e) {
             console.log('Impossible to save: ' + e);
             response = CachingRequest.newResponse(currentUrl, localStorageData.data);
+            observer.next(response);
+            observer.complete();
           }
         });
-      }
-      if (response != undefined) {
-        observer.next(response);
-        observer.complete();
       }
     });
   }

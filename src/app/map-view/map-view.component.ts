@@ -32,23 +32,28 @@ import { Users } from '../services';
 export class MapViewComponent implements OnInit {
   zoom: number = 10;
   lat: number;
-  lng: number; 
+  lng: number;
   private markers: any;
   public map: any;
-  private rows = [];
+  public rows = [];
   selected = [];
-  private columns = [];
+  public columns = [];
   public items = [];
+
+  constructor(
+    public users: Users,
+    private route: ActivatedRoute,
+  ) { }
 
   onSelect({ selected }) {
     this.lat = selected[0].Latitude;
     this.lng = selected[0].Longitude;
     this.markers.forEach(element => {
-      element.isOpen = element.label == selected[0].Id;     
-    }); 
+      element.isOpen = element.label == selected[0].Id;
+    });
     console.log('Select Event', selected, this.selected);
   }
-  
+
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
   }
@@ -56,11 +61,6 @@ export class MapViewComponent implements OnInit {
   markerDragEnd(m: marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
   }
-
-  constructor(
-    public users: Users,
-    private route: ActivatedRoute,
-  ) { }
 
   public ngOnInit() {
     this.columns = [
@@ -70,10 +70,10 @@ export class MapViewComponent implements OnInit {
       { prop: 'Address'}
     ];
 
-    this.route.params.subscribe((params) => {         
+    this.route.params.subscribe((params) => {
       this.users.getLocations(params.id).then((data) => {
         this.items = data;
-        if (this.items.length) { 
+        if (this.items.length) {
             this.initMarkers(data);
         }
       });
